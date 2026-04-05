@@ -6,7 +6,7 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #0f0f1e 0%, #1a0033 100%);
     color: #e0e0e0;
     line-height: 1.6;
@@ -89,7 +89,7 @@ body {
 }
 
 .nav-link::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -5px;
     right: 0;
@@ -145,7 +145,7 @@ body {
 
 .stars::before,
 .stars::after {
-    content: '';
+    content: "";
     position: absolute;
     width: 2px;
     height: 2px;
@@ -167,7 +167,8 @@ body {
 }
 
 @keyframes twinkle {
-    0%, 100% {
+    0%,
+    100% {
         opacity: 0.3;
     }
     50% {
@@ -291,7 +292,8 @@ body {
 }
 
 @keyframes float {
-    0%, 100% {
+    0%,
+    100% {
         transform: translateY(0px);
     }
     50% {
@@ -325,7 +327,7 @@ body {
 }
 
 .mouse::before {
-    content: '';
+    content: "";
     position: absolute;
     width: 2px;
     height: 8px;
@@ -348,7 +350,8 @@ body {
 }
 
 @keyframes bounce {
-    0%, 100% {
+    0%,
+    100% {
         transform: translateY(0);
     }
     50% {
@@ -795,7 +798,7 @@ body {
 }
 
 .social-icon::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -5px;
     left: 0;
