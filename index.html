@@ -1,190 +1,238 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>محمد - مصمم جرافيك احترافي</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>محفظة الأعمال - مصمم جرافيك</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
             <div class="logo">
                 <span class="logo-icon">✨</span>
-                <span class="logo-text">ديزاين ستوديو</span>
+                <span>الأعمال</span>
             </div>
             <ul class="nav-links">
                 <li><a href="#home" class="nav-link active">الرئيسية</a></li>
-                <li><a href="#portfolio" class="nav-link">معرض الأعمال</a></li>
-                <li><a href="#about" class="nav-link">حولي</a></li>
+                <li><a href="#portfolio" class="nav-link">أعمالي</a></li>
+                <li><a href="#about" class="nav-link">من أنا</a></li>
                 <li><a href="#contact" class="nav-link">تواصل معي</a></li>
             </ul>
-            <button class="menu-toggle" id="menuToggle">
-                <i class="fas fa-bars"></i>
-            </button>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
+        <div class="stars"></div>
         <div class="hero-content">
             <div class="hero-text">
-                <h1 class="hero-title animate-fade-in">
-                    <span class="word">مصمم</span>
-                    <span class="word">جرافيك</span>
-                    <span class="word highlight">احترافي</span>
-                </h1>
-                <p class="hero-subtitle animate-fade-in-delay">
-                    أحول أفكارك إلى تصاميم مذهلة تترك انطباعاً دائماً
-                </p>
-                <div class="hero-buttons animate-fade-in-delay-2">
-                    <button class="btn btn-primary" onclick="scrollToSection('portfolio')">شاهد أعمالي</button>
-                    <button class="btn btn-secondary" onclick="scrollToSection('contact')">ابدأ مشروعك</button>
+                <h1 class="hero-title">مرحباً، أنا مصمم جرافيك</h1>
+                <p class="hero-subtitle">أحول أفكارك إلى تصاميم مذهلة</p>
+                <div class="hero-buttons">
+                    <a href="#portfolio" class="btn btn-primary">أعمالي</a>
+                    <a href="#contact" class="btn btn-secondary">تواصل معي</a>
                 </div>
             </div>
-            <div class="hero-image">
-                <div class="floating-card card-1">
-                    <div class="card-icon">🎨</div>
-                </div>
-                <div class="floating-card card-2">
-                    <div class="card-icon">✏️</div>
-                </div>
-                <div class="floating-card card-3">
-                    <div class="card-icon">🖼️</div>
-                </div>
+            <div class="hero-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
             </div>
         </div>
         <div class="scroll-indicator">
-            <span>اسحب للأسفل</span>
-            <i class="fas fa-chevron-down"></i>
+            <span>اسحب لأسفل</span>
+            <div class="mouse"></div>
         </div>
     </section>
 
     <!-- Portfolio Section -->
     <section id="portfolio" class="portfolio">
         <div class="container">
-            <h2 class="section-title">معرض الأعمال</h2>
-            <p class="section-subtitle">أفضل تصاميمي في مختلف المجالات</p>
+            <div class="section-header">
+                <h2>أعمالي المميزة</h2>
+                <div class="header-line"></div>
+            </div>
 
             <div class="filter-buttons">
                 <button class="filter-btn active" data-filter="all">الكل</button>
                 <button class="filter-btn" data-filter="branding">هوية بصرية</button>
-                <button class="filter-btn" data-filter="ui">واجهات مستخدم</button>
-                <button class="filter-btn" data-filter="print">طباعة</button>
-                <button class="filter-btn" data-filter="social">وسائل اجتماعية</button>
+                <button class="filter-btn" data-filter="ui">تصميم الويب</button>
+                <button class="filter-btn" data-filter="poster">ملصقات</button>
             </div>
 
             <div class="portfolio-grid">
-                <!-- Branding Projects -->
+                <!-- Item 1 -->
                 <div class="portfolio-item" data-category="branding">
-                    <div class="portfolio-image">
-                        <div class="placeholder" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                            <i class="fas fa-star"></i>
+                    <div class="portfolio-image" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+                            <rect width="400" height="300" fill="url(#grad1)"/>
+                            <circle cx="200" cy="150" r="80" fill="rgba(255,255,255,0.1)"/>
+                            <text x="200" y="160" text-anchor="middle" fill="white" font-size="24" font-weight="bold">هوية بصرية</text>
+                            <defs>
+                                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <div class="portfolio-overlay">
+                            <h3>هوية بصرية متكاملة</h3>
+                            <p>تصميم شامل لعلامة تجارية</p>
                         </div>
-                    </div>
-                    <div class="portfolio-info">
-                        <h3>هوية بصرية - شركة تقنية</h3>
-                        <p>تصميم هوية شاملة تضمن شعار وألوان وخطوط موحدة</p>
-                        <span class="category-badge">هوية بصرية</span>
                     </div>
                 </div>
 
+                <!-- Item 2 -->
+                <div class="portfolio-item" data-category="ui">
+                    <div class="portfolio-image" style="background: linear-gradient(135deg, #764ba2, #f093fb);">
+                        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+                            <rect width="400" height="300" fill="url(#grad2)"/>
+                            <rect x="80" y="50" width="240" height="200" rx="20" fill="rgba(255,255,255,0.1)" stroke="white" stroke-width="2"/>
+                            <rect x="100" y="70" width="200" height="30" fill="rgba(255,255,255,0.2)"/>
+                            <rect x="100" y="120" width="80" height="15" fill="rgba(255,255,255,0.2)"/>
+                            <rect x="100" y="145" width="120" height="15" fill="rgba(255,255,255,0.2)"/>
+                            <defs>
+                                <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#764ba2;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#f093fb;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <div class="portfolio-overlay">
+                            <h3>واجهة تطبيق حديثة</h3>
+                            <p>تصميم UX/UI احترافي</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="portfolio-item" data-category="poster">
+                    <div class="portfolio-image" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+                            <rect width="400" height="300" fill="url(#grad3)"/>
+                            <circle cx="100" cy="80" r="40" fill="rgba(255,255,255,0.2)"/>
+                            <circle cx="320" cy="240" r="50" fill="rgba(255,255,255,0.15)"/>
+                            <text x="200" y="140" text-anchor="middle" fill="white" font-size="32" font-weight="bold">إعلان</text>
+                            <text x="200" y="180" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="16">حملة تسويقية</text>
+                            <defs>
+                                <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#f5576c;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <div class="portfolio-overlay">
+                            <h3>حملة إعلانية</h3>
+                            <p>تصميم ملصق جذاب</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
                 <div class="portfolio-item" data-category="branding">
-                    <div class="portfolio-image">
-                        <div class="placeholder" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-                            <i class="fas fa-heart"></i>
+                    <div class="portfolio-image" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+                        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+                            <rect width="400" height="300" fill="url(#grad4)"/>
+                            <g transform="translate(200, 150)">
+                                <circle r="60" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+                                <text y="15" text-anchor="middle" fill="white" font-size="48" font-weight="bold">A</text>
+                            </g>
+                            <defs>
+                                <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#4facfe;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#00f2fe;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <div class="portfolio-overlay">
+                            <h3>تصميم شعار</h3>
+                            <p>شعار إحترافي للعلامة التجارية</p>
                         </div>
-                    </div>
-                    <div class="portfolio-info">
-                        <h3>شعار براند فاخرة</h3>
-                        <p>تصميم شعار أنيق لعلامة تجارية في مجال الموضة</p>
-                        <span class="category-badge">هوية بصرية</span>
                     </div>
                 </div>
 
-                <!-- UI Projects -->
+                <!-- Item 5 -->
                 <div class="portfolio-item" data-category="ui">
-                    <div class="portfolio-image">
-                        <div class="placeholder" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
-                            <i class="fas fa-mobile-alt"></i>
+                    <div class="portfolio-image" style="background: linear-gradient(135deg, #43e97b, #38f9d7);">
+                        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+                            <rect width="400" height="300" fill="url(#grad5)"/>
+                            <rect x="50" y="40" width="300" height="220" rx="15" fill="rgba(255,255,255,0.1)" stroke="white" stroke-width="2"/>
+                            <rect x="70" y="60" width="260" height="40" fill="rgba(255,255,255,0.2)" rx="8"/>
+                            <rect x="70" y="120" width="260" height="120" fill="rgba(255,255,255,0.1)" rx="8"/>
+                            <defs>
+                                <linearGradient id="grad5" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#43e97b;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#38f9d7;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <div class="portfolio-overlay">
+                            <h3>تصميم موقع ويب</h3>
+                            <p>موقع تفاعلي وانميتد</p>
                         </div>
-                    </div>
-                    <div class="portfolio-info">
-                        <h3>تصميم تطبيق موبايل</h3>
-                        <p>واجهة مستخدم جميلة وسهلة الاستخدام لتطبيق توصيل الطعام</p>
-                        <span class="category-badge">واجهات مستخدم</span>
                     </div>
                 </div>
 
-                <div class="portfolio-item" data-category="ui">
-                    <div class="portfolio-image">
-                        <div class="placeholder" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
-                            <i class="fas fa-laptop"></i>
+                <!-- Item 6 -->
+                <div class="portfolio-item" data-category="poster">
+                    <div class="portfolio-image" style="background: linear-gradient(135deg, #fa709a, #fee140);">
+                        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+                            <rect width="400" height="300" fill="url(#grad6)"/>
+                            <circle cx="100" cy="100" r="35" fill="rgba(255,255,255,0.2)"/>
+                            <circle cx="300" cy="100" r="35" fill="rgba(255,255,255,0.2)"/>
+                            <circle cx="200" cy="230" r="35" fill="rgba(255,255,255,0.2)"/>
+                            <text x="200" y="155" text-anchor="middle" fill="white" font-size="28" font-weight="bold">وسائط اجتماعية</text>
+                            <defs>
+                                <linearGradient id="grad6" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#fa709a;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#fee140;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <div class="portfolio-overlay">
+                            <h3>محتوى وسائل التواصل</h3>
+                            <p>تصاميم جذابة للشبكات الاجتماعية</p>
                         </div>
-                    </div>
-                    <div class="portfolio-info">
-                        <h3>تصميم موقع تجارة إلكترونية</h3>
-                        <p>واجهة موقع احترافي لمتجر إلكتروني بتجربة مستخدم محسنة</p>
-                        <span class="category-badge">واجهات مستخدم</span>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
 
-                <!-- Print Projects -->
-                <div class="portfolio-item" data-category="print">
-                    <div class="portfolio-image">
-                        <div class="placeholder" style="background: linear-gradient(135deg, #ff9a56 0%, #ff6a88 100%);">
-                            <i class="fas fa-file-pdf"></i>
-                        </div>
-                    </div>
-                    <div class="portfolio-info">
-                        <h3>تصميم كتيب تسويقي</h3>
-                        <p>كتيب متعدد الصفحات بتصميم احترافي وديناميكي</p>
-                        <span class="category-badge">طباعة</span>
-                    </div>
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <div class="section-header">
+                <h2>مهاراتي</h2>
+                <div class="header-line"></div>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">🎨</div>
+                    <h3>تصميم مرئي</h3>
+                    <p>إنشاء تصاميم فريدة وملفتة للنظر</p>
                 </div>
-
-                <div class="portfolio-item" data-category="print">
-                    <div class="portfolio-image">
-                        <div class="placeholder" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                            <i class="fas fa-id-card"></i>
-                        </div>
-                    </div>
-                    <div class="portfolio-info">
-                        <h3>تصميم بطاقات عمل</h3>
-                        <p>مجموعة بطاقات عمل احترافية بتصاميم فريدة</p>
-                        <span class="category-badge">طباعة</span>
-                    </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🎯</div>
+                    <h3>الهوية البصرية</h3>
+                    <p>بناء علامات تجارية قوية</p>
                 </div>
-
-                <!-- Social Media -->
-                <div class="portfolio-item" data-category="social">
-                    <div class="portfolio-image">
-                        <div class="placeholder" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
-                            <i class="fas fa-image"></i>
-                        </div>
-                    </div>
-                    <div class="portfolio-info">
-                        <h3>منشورات وسائل اجتماعية</h3>
-                        <p>مجموعة منشورات احترافية لحملات إعلانية متعددة</p>
-                        <span class="category-badge">وسائل اجتماعية</span>
-                    </div>
+                <div class="skill-card">
+                    <div class="skill-icon">❤️</div>
+                    <h3>التصميم السريع</h3>
+                    <p>تصاميم محدثة بأسرع وقت</p>
                 </div>
-
-                <div class="portfolio-item" data-category="social">
-                    <div class="portfolio-image">
-                        <div class="placeholder" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
-                            <i class="fas fa-play-circle"></i>
-                        </div>
-                    </div>
-                    <div class="portfolio-info">
-                        <h3>تصميم قوالب فيديو</h3>
-                        <p>قوالب فيديو احترافية لمختلف منصات التواصل الاجتماعي</p>
-                        <span class="category-badge">وسائل اجتماعية</span>
-                    </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🚀</div>
+                    <h3>التصميم الحديث</h3>
+                    <p>مواكبة أحدث الاتجاهات</p>
                 </div>
             </div>
         </div>
@@ -193,64 +241,61 @@
     <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
-            <h2 class="section-title">حولي</h2>
-
             <div class="about-content">
                 <div class="about-text">
-                    <h3>مصمم جرافيك متخصص وذو خبرة</h3>
-                    <p>
-                        مع أكثر من 8 سنوات من الخبرة في مجال التصميم الجرافيكي،
-                        ساعدت عشرات الشركات والعلامات التجارية على تحقيق رؤيتهم البصرية.
-                    </p>
-                    <p>
-                        متخصص في تصميم الهويات البصرية والواجهات الرقمية والمواد الطباعية.
-                        أركز على دمج الإبداع مع الفعالية لإنشاء تصاميم تحقق النتائج.
-                    </p>
-
-                    <div class="skills">
-                        <div class="skill-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Adobe Creative Suite</span>
+                    <h2>من أنا</h2>
+                    <p>أنا مصمم جرافيك متخصص في إنشاء هويات بصرية قوية وتصاميم ويب حديثة. مع خبرة تزيد عن عدة سنوات في مجال التصميم، أساعد الشركات والعلامات التجارية على البروز والتميز في السوق.</p>
+                    <p>أؤمن بأن التصميم الجيد ليس فقط جميل الشكل، بل يجب أن يحقق أهدافاً محددة ويحكي قصة العلامة التجارية بفعالية.</p>
+                    <div class="about-stats">
+                        <div class="stat">
+                            <h3>50+</h3>
+                            <p>مشروع منجز</p>
                         </div>
-                        <div class="skill-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>تصميم الهويات البصرية</span>
+                        <div class="stat">
+                            <h3>30+</h3>
+                            <p>عميل سعيد</p>
                         </div>
-                        <div class="skill-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>تصميم واجهات المستخدم</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>تصميم المواد الطباعية</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>تصميم الإعلانات الرقمية</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>فن الحروفية والتايبوغرافي</span>
+                        <div class="stat">
+                            <h3>5+</h3>
+                            <p>سنوات خبرة</p>
                         </div>
                     </div>
                 </div>
-
-                <div class="about-stats">
-                    <div class="stat-box">
-                        <div class="stat-number">250+</div>
-                        <p>مشروع منجز</p>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-number">80+</div>
-                        <p>عميل راضي</p>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-number">8+</div>
-                        <p>سنوات خبرة</p>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-number">30+</div>
-                        <p>جوائز وتكريمات</p>
+                <div class="about-image">
+                    <div class="image-container">
+                        <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%; border-radius: 15px; background: linear-gradient(135deg, #667eea, #764ba2);">
+                            <defs>
+                                <linearGradient id="skinGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#f4a460;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#daa520;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <!-- Head -->
+                            <circle cx="200" cy="120" r="60" fill="url(#skinGrad)"/>
+                            <!-- Hair -->
+                            <path d="M 140 120 Q 130 60 200 40 Q 270 60 260 120" fill="#2c2c2c"/>
+                            <!-- Eyes -->
+                            <circle cx="180" cy="110" r="6" fill="#000"/>
+                            <circle cx="220" cy="110" r="6" fill="#000"/>
+                            <circle cx="182" cy="108" r="2" fill="#fff"/>
+                            <circle cx="222" cy="108" r="2" fill="#fff"/>
+                            <!-- Smile -->
+                            <path d="M 180 130 Q 200 140 220 130" stroke="#000" stroke-width="2" fill="none" stroke-linecap="round"/>
+                            <!-- Body -->
+                            <ellipse cx="200" cy="280" rx="70" ry="100" fill="#667eea" opacity="0.3"/>
+                            <!-- Shirt/Sweater -->
+                            <path d="M 130 180 L 120 280 Q 120 350 200 370 Q 280 350 280 280 L 270 180 Z" fill="#764ba2"/>
+                            <!-- Arms -->
+                            <ellipse cx="80" cy="240" rx="30" ry="70" fill="url(#skinGrad)" transform="rotate(-30 80 240)"/>
+                            <ellipse cx="320" cy="240" rx="30" ry="70" fill="url(#skinGrad)" transform="rotate(30 320 240)"/>
+                            <!-- Hands -->
+                            <circle cx="50" cy="300" r="25" fill="url(#skinGrad)"/>
+                            <circle cx="350" cy="300" r="25" fill="url(#skinGrad)"/>
+                            <!-- Decorative elements -->
+                            <circle cx="100" cy="150" r="8" fill="rgba(255,255,255,0.2)"/>
+                            <circle cx="300" cy="150" r="8" fill="rgba(255,255,255,0.2)"/>
+                        </svg>
+                        <div class="image-decoration"></div>
                     </div>
                 </div>
             </div>
@@ -260,49 +305,41 @@
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <h2 class="section-title">تواصل معي</h2>
-            <p class="section-subtitle">دعنا نبدأ مشروعك القادم معاً</p>
+            <div class="section-header">
+                <h2>تواصل معي</h2>
+                <div class="header-line"></div>
+            </div>
 
             <div class="contact-content">
                 <div class="contact-info">
-                    <div class="info-box">
-                        <i class="fas fa-envelope"></i>
+                    <div class="info-card">
+                        <div class="info-icon">📧</div>
                         <h3>البريد الإلكتروني</h3>
-                        <p>design@studio.com</p>
+                        <p>your-email@example.com</p>
                     </div>
-                    <div class="info-box">
-                        <i class="fas fa-phone"></i>
+                    <div class="info-card">
+                        <div class="info-icon">📱</div>
                         <h3>الهاتف</h3>
-                        <p>+965 99999999</p>
+                        <p>+966 50 123 4567</p>
                     </div>
-                    <div class="info-box">
-                        <i class="fas fa-map-marker-alt"></i>
+                    <div class="info-card">
+                        <div class="info-icon">📍</div>
                         <h3>الموقع</h3>
-                        <p>الكويت</p>
+                        <p>المملكة العربية السعودية</p>
                     </div>
                 </div>
 
                 <form class="contact-form" id="contactForm">
                     <div class="form-group">
-                        <input type="text" placeholder="اسمك الكامل" required class="form-input">
+                        <input type="text" placeholder="اسمك" required>
                     </div>
                     <div class="form-group">
-                        <input type="email" placeholder="بريدك الإلكتروني" required class="form-input">
+                        <input type="email" placeholder="بريدك الإلكتروني" required>
                     </div>
                     <div class="form-group">
-                        <select required class="form-input">
-                            <option value="">اختر نوع المشروع</option>
-                            <option value="branding">هوية بصرية</option>
-                            <option value="ui">تصميم واجهة</option>
-                            <option value="print">طباعة</option>
-                            <option value="social">وسائل اجتماعية</option>
-                            <option value="other">أخرى</option>
-                        </select>
+                        <textarea placeholder="رسالتك" rows="5" required></textarea>
                     </div>
-                    <div class="form-group">
-                        <textarea placeholder="اخبرني عن مشروعك..." rows="5" required class="form-input"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-submit">إرسال الرسالة</button>
+                    <button type="submit" class="btn btn-primary">إرسال الرسالة</button>
                 </form>
             </div>
         </div>
@@ -311,36 +348,15 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>ديزاين ستوديو</h3>
-                    <p>تصاميم احترافية تحقق نتائج فعلية لعملك</p>
-                </div>
-                <div class="footer-section">
-                    <h3>الروابط السريعة</h3>
-                    <ul>
-                        <li><a href="#home">الرئيسية</a></li>
-                        <li><a href="#portfolio">الأعمال</a></li>
-                        <li><a href="#contact">تواصل معي</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>تابعني على</h3>
-                    <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-behance"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-dribbble"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-                    </div>
-                </div>
+            <div class="social-links">
+                <a href="#" class="social-icon">Instagram</a>
+                <a href="#" class="social-icon">Behance</a>
+                <a href="#" class="social-icon">LinkedIn</a>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 جميع الحقوق محفوظة | تصميم احترافي</p>
-            </div>
+            <p>&copy; 2026 جميع الحقوق محفوظة. صُنع بـ ❤️ من الحب للتصميم</p>
         </div>
     </footer>
 
     <script src="script.js"></script>
 </body>
-
 </html>
