@@ -1,385 +1,1585 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>محفظة الأعمال - مصمم جرافيك</title>
-    <link rel="stylesheet" href="style.css">
+    <title>PORTFOLIO — Motion & Visual Design</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f5f5f3;
+            --surface: #ebebea;
+            --border: #d8d8d6;
+            --accent: #1a1a1a;
+            --accent2: #555555;
+            --text: #111111;
+            --muted: #888888;
+            --font-display: 'Bebas Neue', sans-serif;
+            --font-mono: 'Space Mono', monospace;
+            --font-body: 'DM Sans', sans-serif;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* CUSTOM CURSOR */
+        #cursor {
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.15s ease, width 0.2s, height 0.2s, background 0.2s;
+            transform: translate(-50%, -50%);
+        }
+
+        #cursor-ring {
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(26, 26, 26, 0.4);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        body:hover #cursor {
+            opacity: 1;
+        }
+
+        .hoverable:hover~* #cursor,
+        a:hover #cursor {
+            transform: translate(-50%, -50%) scale(2);
+        }
+
+        /* NOISE OVERLAY */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9000;
+            opacity: 0.15;
+        }
+
+        /* LOADER */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: var(--bg);
+            z-index: 8000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transition: opacity 0.6s ease, visibility 0.6s;
+        }
+
+        #loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-text {
+            font-family: var(--font-display);
+            font-size: clamp(60px, 12vw, 120px);
+            letter-spacing: 0.05em;
+            overflow: hidden;
+        }
+
+        .loader-text span {
+            display: inline-block;
+            animation: slideUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+            opacity: 0;
+            transform: translateY(100%);
+        }
+
+        .loader-bar {
+            width: 200px;
+            height: 2px;
+            background: var(--border);
+            margin-top: 24px;
+            overflow: hidden;
+        }
+
+        .loader-bar-fill {
+            height: 100%;
+            background: var(--accent);
+            animation: loadBar 1.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+            width: 0;
+        }
+
+        @keyframes loadBar {
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 40px;
+            mix-blend-mode: difference;
+        }
+
+        .nav-logo {
+            font-family: var(--font-display);
+            font-size: 22px;
+            letter-spacing: 0.15em;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text);
+            text-decoration: none;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        /* HERO */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 0 40px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-marquee-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            opacity: 0.04;
+            pointer-events: none;
+        }
+
+        .hero-marquee-text {
+            font-family: var(--font-display);
+            font-size: clamp(120px, 20vw, 220px);
+            white-space: nowrap;
+            animation: marquee 12s linear infinite;
+            letter-spacing: 0.05em;
+        }
+
+        @keyframes marquee {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        .hero-tag {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeUp 0.8s 2s ease forwards;
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(80px, 14vw, 180px);
+            line-height: 0.9;
+            letter-spacing: 0.02em;
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeUp 1s 2.1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+
+        .hero-title em {
+            font-style: normal;
+            color: var(--accent);
+            -webkit-text-stroke: 0px;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-body);
+            font-size: clamp(14px, 1.5vw, 18px);
+            font-weight: 300;
+            color: var(--muted);
+            margin-top: 28px;
+            max-width: 480px;
+            line-height: 1.7;
+            opacity: 0;
+            animation: fadeUp 0.8s 2.4s ease forwards;
+        }
+
+        .hero-cta {
+            margin-top: 48px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            opacity: 0;
+            animation: fadeUp 0.8s 2.6s ease forwards;
+        }
+
+        .btn-primary {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 16px 36px;
+            background: var(--accent);
+            color: #fff;
+            text-decoration: none;
+            display: inline-block;
+            clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: #333;
+            transform: translateY(-2px);
+        }
+
+        .btn-ghost {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--muted);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.2s, gap 0.2s;
+        }
+
+        .btn-ghost:hover {
+            color: var(--text);
+            gap: 14px;
+        }
+
+        .btn-ghost::after {
+            content: '→';
+        }
+
+        .hero-scroll-indicator {
+            position: absolute;
+            bottom: 60px;
+            right: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            animation: fadeUp 0.8s 3s ease forwards;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, transparent, var(--accent));
+            animation: scrollPulse 2s ease infinite;
+        }
+
+        @keyframes scrollPulse {
+
+            0%,
+            100% {
+                opacity: 0.3;
+                transform: scaleY(0.8);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scaleY(1);
+            }
+        }
+
+        .scroll-txt {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--muted);
+            writing-mode: vertical-rl;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* TICKER BAR */
+        .ticker-bar {
+            background: var(--accent);
+            padding: 12px 0;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .ticker-content {
+            display: inline-block;
+            animation: ticker 20s linear infinite;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #f5f5f3;
+        }
+
+        .ticker-sep {
+            margin: 0 24px;
+            opacity: 0.5;
+        }
+
+        @keyframes ticker {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* SECTIONS */
+        section {
+            padding: 120px 40px;
+        }
+
+        .section-label {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 30px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(50px, 7vw, 90px);
+            line-height: 1;
+            letter-spacing: 0.02em;
+        }
+
+        /* ABOUT */
+        #about {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-visual {
+            position: relative;
+            aspect-ratio: 4/5;
+            background: var(--surface);
+            overflow: hidden;
+        }
+
+        .about-visual-inner {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #e0e0de 0%, #d0d0ce 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-shape {
+            width: 200px;
+            height: 200px;
+            border: 1px solid var(--accent);
+            animation: morphShape 6s ease infinite;
+        }
+
+        @keyframes morphShape {
+
+            0%,
+            100% {
+                border-radius: 0;
+                transform: rotate(0deg) scale(1);
+            }
+
+            33% {
+                border-radius: 50%;
+                transform: rotate(45deg) scale(0.8);
+            }
+
+            66% {
+                border-radius: 30%;
+                transform: rotate(90deg) scale(1.1);
+            }
+        }
+
+        .about-shape-2 {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background: var(--accent);
+            opacity: 0.15;
+            animation: morphShape 6s ease infinite reverse;
+        }
+
+        .about-visual::after {
+            content: 'DESIGN';
+            position: absolute;
+            bottom: 24px;
+            right: 24px;
+            font-family: var(--font-display);
+            font-size: 72px;
+            color: rgba(26, 26, 26, 0.06);
+            line-height: 1;
+        }
+
+        .about-corner {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-family: var(--font-mono);
+            font-size: 9px;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            opacity: 0.7;
+        }
+
+        .about-text p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: rgba(240, 236, 228, 0.75);
+            margin-bottom: 20px;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .stat {
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+        }
+
+        .stat-num {
+            font-family: var(--font-display);
+            font-size: 52px;
+            line-height: 1;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-top: 6px;
+        }
+
+        /* SKILLS */
+        #skills {
+            background: var(--surface);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            margin-top: 60px;
+        }
+
+        .skill-card {
+            background: var(--bg);
+            padding: 36px 32px;
+            border: 1px solid var(--border);
+            transition: border-color 0.3s, transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 0;
+            background: var(--accent);
+            transition: height 0.3s;
+        }
+
+        .skill-card:hover {
+            border-color: rgba(255, 60, 0, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .skill-card:hover::before {
+            height: 100%;
+        }
+
+        .skill-icon {
+            font-size: 32px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .skill-name {
+            font-family: var(--font-display);
+            font-size: 28px;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+        }
+
+        .skill-desc {
+            font-size: 13px;
+            line-height: 1.7;
+            color: var(--muted);
+            font-family: var(--font-mono);
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .tag {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 5px 10px;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            transition: all 0.2s;
+        }
+
+        .skill-card:hover .tag {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* PORTFOLIO */
+        #portfolio {}
+
+        .portfolio-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 60px;
+        }
+
+        .portfolio-filter {
+            display: flex;
+            gap: 4px;
+        }
+
+        .filter-btn {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 10px 18px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--muted);
+            cursor: none;
+            transition: all 0.2s;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: auto;
+            gap: 16px;
+        }
+
+        .work-item {
+            position: relative;
+            overflow: hidden;
+            background: var(--surface);
+            cursor: none;
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .work-item:hover {
+            transform: scale(0.98);
+        }
+
+        .work-item:nth-child(1) {
+            grid-column: span 7;
+            grid-row: span 1;
+        }
+
+        .work-item:nth-child(2) {
+            grid-column: span 5;
+            grid-row: span 1;
+        }
+
+        .work-item:nth-child(3) {
+            grid-column: span 4;
+            grid-row: span 1;
+        }
+
+        .work-item:nth-child(4) {
+            grid-column: span 4;
+            grid-row: span 1;
+        }
+
+        .work-item:nth-child(5) {
+            grid-column: span 4;
+            grid-row: span 1;
+        }
+
+        .work-item:nth-child(6) {
+            grid-column: span 8;
+            grid-row: span 1;
+        }
+
+        .work-item:nth-child(7) {
+            grid-column: span 4;
+            grid-row: span 1;
+        }
+
+        .work-canvas {
+            width: 100%;
+            aspect-ratio: 16/10;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .work-item:nth-child(2) .work-canvas,
+        .work-item:nth-child(3) .work-canvas,
+        .work-item:nth-child(4) .work-canvas,
+        .work-item:nth-child(7) .work-canvas {
+            aspect-ratio: 4/3;
+        }
+
+        .work-canvas canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .work-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(8, 8, 8, 0);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 28px;
+            transition: background 0.3s;
+        }
+
+        .work-item:hover .work-overlay {
+            background: rgba(8, 8, 8, 0.75);
+        }
+
+        .work-info {
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.3s;
+        }
+
+        .work-item:hover .work-info {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .work-cat {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 6px;
+        }
+
+        .work-name {
+            font-family: var(--font-display);
+            font-size: 28px;
+            letter-spacing: 0.05em;
+        }
+
+        .work-year {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--muted);
+            margin-top: 4px;
+        }
+
+        /* PROCESS */
+        #process {
+            background: var(--surface);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #process::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--border);
+            transform: translateY(-50%);
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            margin-top: 80px;
+            position: relative;
+        }
+
+        .process-step {
+            padding: 40px 32px;
+            border-right: 1px solid var(--border);
+            position: relative;
+        }
+
+        .process-step:last-child {
+            border-right: none;
+        }
+
+        .step-num {
+            font-family: var(--font-display);
+            font-size: 100px;
+            line-height: 1;
+            color: var(--border);
+            margin-bottom: 16px;
+            transition: color 0.3s;
+        }
+
+        .process-step:hover .step-num {
+            color: rgba(255, 60, 0, 0.15);
+        }
+
+        .step-title {
+            font-family: var(--font-display);
+            font-size: 28px;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+        }
+
+        .step-desc {
+            font-size: 13px;
+            line-height: 1.7;
+            color: var(--muted);
+            font-family: var(--font-mono);
+        }
+
+        /* CONTACT */
+        #contact {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-bg-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: var(--font-display);
+            font-size: clamp(100px, 16vw, 200px);
+            white-space: nowrap;
+            color: rgba(26, 26, 26, 0.04);
+            pointer-events: none;
+            letter-spacing: 0.05em;
+        }
+
+        .contact-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-big {
+            font-family: var(--font-display);
+            font-size: clamp(60px, 10vw, 130px);
+            line-height: 0.95;
+            letter-spacing: 0.02em;
+            margin-top: 24px;
+            margin-bottom: 48px;
+        }
+
+        .contact-big a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.2s;
+            position: relative;
+        }
+
+        .contact-big a:hover {
+            color: var(--accent);
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--muted);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 8px;
+            transition: all 0.2s;
+        }
+
+        .contact-link:hover {
+            color: var(--text);
+            border-color: var(--accent);
+            gap: 16px;
+        }
+
+        .contact-link span {
+            font-size: 16px;
+        }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 32px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-family: var(--font-display);
+            font-size: 20px;
+            letter-spacing: 0.15em;
+        }
+
+        .footer-copy {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            letter-spacing: 0.1em;
+            color: var(--muted);
+        }
+
+        /* SCROLL ANIMATIONS */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1), transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .reveal-delay-2 {
+            transition-delay: 0.2s;
+        }
+
+        .reveal-delay-3 {
+            transition-delay: 0.3s;
+        }
+
+        .reveal-delay-4 {
+            transition-delay: 0.4s;
+        }
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+            nav {
+                padding: 16px 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            section {
+                padding: 80px 20px;
+            }
+
+            #about {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .about-visual {
+                aspect-ratio: 4/3;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .work-item:nth-child(n) {
+                grid-column: span 2;
+            }
+
+            .process-steps {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+
+            #hero {
+                padding: 0 20px 60px;
+            }
+
+            .hero-scroll-indicator {
+                display: none;
+            }
+
+            .portfolio-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+
+            .portfolio-filter {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="logo">
-                <span class="logo-icon">✨</span>
-                <span>الأعمال</span>
-            </div>
-            <ul class="nav-links">
-                <li><a href="#home" class="nav-link active">الرئيسية</a></li>
-                <li><a href="#portfolio" class="nav-link">أعمالي</a></li>
-                <li><a href="#about" class="nav-link">من أنا</a></li>
-                <li><a href="#contact" class="nav-link">تواصل معي</a></li>
-            </ul>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+
+    <!-- CURSOR -->
+    <div id="cursor"></div>
+    <div id="cursor-ring"></div>
+
+    <!-- LOADER -->
+    <div id="loader">
+        <div class="loader-text">
+            <span style="animation-delay:0s">P</span><span style="animation-delay:0.05s">O</span><span
+                style="animation-delay:0.1s">R</span><span style="animation-delay:0.15s">T</span><span
+                style="animation-delay:0.2s">F</span><span style="animation-delay:0.25s">O</span><span
+                style="animation-delay:0.3s">L</span><span style="animation-delay:0.35s">I</span><span
+                style="animation-delay:0.4s">O</span>
         </div>
+        <div class="loader-bar">
+            <div class="loader-bar-fill"></div>
+        </div>
+    </div>
+
+    <!-- NAV -->
+    <nav>
+        <a href="#" class="nav-logo">PORTFOLIO.</a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#portfolio">Work</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="stars"></div>
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1 class="hero-title">مرحباً، أنا مصمم جرافيك</h1>
-                <p class="hero-subtitle">أحول أفكارك إلى تصاميم مذهلة</p>
-                <div class="hero-buttons">
-                    <a href="#portfolio" class="btn btn-primary">أعمالي</a>
-                    <a href="#contact" class="btn btn-secondary">تواصل معي</a>
-                </div>
-            </div>
-            <div class="hero-shapes">
-                <div class="shape shape-1"></div>
-                <div class="shape shape-2"></div>
-                <div class="shape shape-3"></div>
-            </div>
+    <!-- HERO -->
+    <section id="hero">
+        <div class="hero-marquee-bg">
+            <div class="hero-marquee-text">MOTION — GRAPHIC — VISUAL — BRANDING — DESIGN — MOTION — GRAPHIC — VISUAL —
+                BRANDING — DESIGN — &nbsp;</div>
         </div>
-        <div class="scroll-indicator">
-            <span>اسحب لأسفل</span>
-            <div class="mouse"></div>
+        <div class="hero-tag">Motion & Graphic Designer — Cairo, Egypt</div>
+        <h1 class="hero-title">DESIGN<br>THAT<br><em>MOVES.</em></h1>
+        <p class="hero-subtitle">موشن جرافيك وإعلانات تصل للجمهور. أحول الأفكار إلى تجارب بصرية لا تُنسى.</p>
+        <div class="hero-cta">
+            <a href="#portfolio" class="btn-primary">View Work</a>
+            <a href="#contact" class="btn-ghost">Let's Talk</a>
+        </div>
+        <div class="hero-scroll-indicator">
+            <div class="scroll-txt">Scroll</div>
+            <div class="scroll-line"></div>
         </div>
     </section>
 
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="portfolio">
-        <div class="container">
-            <div class="section-header">
-                <h2>أعمالي المميزة</h2>
-                <div class="header-line"></div>
+    <!-- TICKER -->
+    <div class="ticker-bar">
+        <span class="ticker-content">
+            Motion Graphics <span class="ticker-sep">✦</span> Brand Identity <span class="ticker-sep">✦</span> Social
+            Media Design <span class="ticker-sep">✦</span> Video Production <span class="ticker-sep">✦</span> Ad
+            Campaigns <span class="ticker-sep">✦</span> Visual Storytelling <span class="ticker-sep">✦</span>
+            Motion Graphics <span class="ticker-sep">✦</span> Brand Identity <span class="ticker-sep">✦</span> Social
+            Media Design <span class="ticker-sep">✦</span> Video Production <span class="ticker-sep">✦</span> Ad
+            Campaigns <span class="ticker-sep">✦</span> Visual Storytelling <span class="ticker-sep">✦</span>
+        </span>
+    </div>
+
+    <!-- ABOUT -->
+    <section id="about">
+        <div class="about-visual reveal">
+            <div class="about-visual-inner">
+                <div class="about-shape-2"></div>
+                <div class="about-shape"></div>
             </div>
-
-            <div class="filter-buttons">
-                <button class="filter-btn active" data-filter="all">الكل</button>
-                <button class="filter-btn" data-filter="branding">هوية بصرية</button>
-                <button class="filter-btn" data-filter="ui">تصميم الويب</button>
-                <button class="filter-btn" data-filter="poster">ملصقات</button>
-            </div>
-
-            <div class="portfolio-grid">
-                <!-- Item 1 -->
-                <div class="portfolio-item" data-category="branding">
-                    <div class="portfolio-image" style="background: linear-gradient(135deg, #667eea, #764ba2);">
-                        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"
-                            style="width: 100%; height: 100%;">
-                            <rect width="400" height="300" fill="url(#grad1)" />
-                            <circle cx="200" cy="150" r="80" fill="rgba(255,255,255,0.1)" />
-                            <text x="200" y="160" text-anchor="middle" fill="white" font-size="24"
-                                font-weight="bold">هوية بصرية</text>
-                            <defs>
-                                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                        </svg>
-                        <div class="portfolio-overlay">
-                            <h3>هوية بصرية متكاملة</h3>
-                            <p>تصميم شامل لعلامة تجارية</p>
-                        </div>
-                    </div>
+            <div class="about-corner">DESIGNER.EXE</div>
+        </div>
+        <div class="about-text">
+            <div class="section-label reveal">About Me</div>
+            <h2 class="section-title reveal reveal-delay-1">THE<br>CREATOR.</h2>
+            <p class="reveal reveal-delay-2" style="margin-top:24px">مصمم جرافيك متخصص في الموشن جرافيك والإعلانات. أعمل
+                على تحويل الرؤى الإبداعية إلى محتوى بصري يترك أثراً حقيقياً.</p>
+            <p class="reveal reveal-delay-2">أؤمن أن التصميم الجيد لا يكتفي بأن يبدو جميلاً — بل يجب أن يُحرّك المشاعر
+                ويدفع للتفاعل.</p>
+            <div class="about-stats">
+                <div class="stat reveal reveal-delay-1">
+                    <div class="stat-num counter" data-target="5">0</div>
+                    <div class="stat-label">Years Experience</div>
                 </div>
-
-                <!-- Item 2 -->
-                <div class="portfolio-item" data-category="ui">
-                    <div class="portfolio-image" style="background: linear-gradient(135deg, #764ba2, #f093fb);">
-                        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"
-                            style="width: 100%; height: 100%;">
-                            <rect width="400" height="300" fill="url(#grad2)" />
-                            <rect x="80" y="50" width="240" height="200" rx="20" fill="rgba(255,255,255,0.1)"
-                                stroke="white" stroke-width="2" />
-                            <rect x="100" y="70" width="200" height="30" fill="rgba(255,255,255,0.2)" />
-                            <rect x="100" y="120" width="80" height="15" fill="rgba(255,255,255,0.2)" />
-                            <rect x="100" y="145" width="120" height="15" fill="rgba(255,255,255,0.2)" />
-                            <defs>
-                                <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#764ba2;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#f093fb;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                        </svg>
-                        <div class="portfolio-overlay">
-                            <h3>واجهة تطبيق حديثة</h3>
-                            <p>تصميم UX/UI احترافي</p>
-                        </div>
-                    </div>
+                <div class="stat reveal reveal-delay-2">
+                    <div class="stat-num counter" data-target="120">0</div>
+                    <div class="stat-label">Projects Done</div>
                 </div>
-
-                <!-- Item 3 -->
-                <div class="portfolio-item" data-category="poster">
-                    <div class="portfolio-image" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
-                        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"
-                            style="width: 100%; height: 100%;">
-                            <rect width="400" height="300" fill="url(#grad3)" />
-                            <circle cx="100" cy="80" r="40" fill="rgba(255,255,255,0.2)" />
-                            <circle cx="320" cy="240" r="50" fill="rgba(255,255,255,0.15)" />
-                            <text x="200" y="140" text-anchor="middle" fill="white" font-size="32"
-                                font-weight="bold">إعلان</text>
-                            <text x="200" y="180" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="16">حملة
-                                تسويقية</text>
-                            <defs>
-                                <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#f5576c;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                        </svg>
-                        <div class="portfolio-overlay">
-                            <h3>حملة إعلانية</h3>
-                            <p>تصميم ملصق جذاب</p>
-                        </div>
-                    </div>
+                <div class="stat reveal reveal-delay-3">
+                    <div class="stat-num counter" data-target="45">0</div>
+                    <div class="stat-label">Happy Clients</div>
                 </div>
-
-                <!-- Item 4 -->
-                <div class="portfolio-item" data-category="branding">
-                    <div class="portfolio-image" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
-                        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"
-                            style="width: 100%; height: 100%;">
-                            <rect width="400" height="300" fill="url(#grad4)" />
-                            <g transform="translate(200, 150)">
-                                <circle r="60" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2" />
-                                <text y="15" text-anchor="middle" fill="white" font-size="48"
-                                    font-weight="bold">A</text>
-                            </g>
-                            <defs>
-                                <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#4facfe;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#00f2fe;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                        </svg>
-                        <div class="portfolio-overlay">
-                            <h3>تصميم شعار</h3>
-                            <p>شعار إحترافي للعلامة التجارية</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Item 5 -->
-                <div class="portfolio-item" data-category="ui">
-                    <div class="portfolio-image" style="background: linear-gradient(135deg, #43e97b, #38f9d7);">
-                        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"
-                            style="width: 100%; height: 100%;">
-                            <rect width="400" height="300" fill="url(#grad5)" />
-                            <rect x="50" y="40" width="300" height="220" rx="15" fill="rgba(255,255,255,0.1)"
-                                stroke="white" stroke-width="2" />
-                            <rect x="70" y="60" width="260" height="40" fill="rgba(255,255,255,0.2)" rx="8" />
-                            <rect x="70" y="120" width="260" height="120" fill="rgba(255,255,255,0.1)" rx="8" />
-                            <defs>
-                                <linearGradient id="grad5" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#43e97b;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#38f9d7;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                        </svg>
-                        <div class="portfolio-overlay">
-                            <h3>تصميم موقع ويب</h3>
-                            <p>موقع تفاعلي وانميتد</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Item 6 -->
-                <div class="portfolio-item" data-category="poster">
-                    <div class="portfolio-image" style="background: linear-gradient(135deg, #fa709a, #fee140);">
-                        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"
-                            style="width: 100%; height: 100%;">
-                            <rect width="400" height="300" fill="url(#grad6)" />
-                            <circle cx="100" cy="100" r="35" fill="rgba(255,255,255,0.2)" />
-                            <circle cx="300" cy="100" r="35" fill="rgba(255,255,255,0.2)" />
-                            <circle cx="200" cy="230" r="35" fill="rgba(255,255,255,0.2)" />
-                            <text x="200" y="155" text-anchor="middle" fill="white" font-size="28"
-                                font-weight="bold">وسائط اجتماعية</text>
-                            <defs>
-                                <linearGradient id="grad6" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#fa709a;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#fee140;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                        </svg>
-                        <div class="portfolio-overlay">
-                            <h3>محتوى وسائل التواصل</h3>
-                            <p>تصاميم جذابة للشبكات الاجتماعية</p>
-                        </div>
-                    </div>
+                <div class="stat reveal reveal-delay-4">
+                    <div class="stat-num counter" data-target="12">0</div>
+                    <div class="stat-label">Awards Won</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-        <div class="container">
-            <div class="section-header">
-                <h2>مهاراتي</h2>
-                <div class="header-line"></div>
-            </div>
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <div class="skill-icon">🎨</div>
-                    <h3>تصميم مرئي</h3>
-                    <p>إنشاء تصاميم فريدة وملفتة للنظر</p>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">🎯</div>
-                    <h3>الهوية البصرية</h3>
-                    <p>بناء علامات تجارية قوية</p>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">❤️</div>
-                    <h3>التصميم السريع</h3>
-                    <p>تصاميم محدثة بأسرع وقت</p>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">🚀</div>
-                    <h3>التصميم الحديث</h3>
-                    <p>مواكبة أحدث الاتجاهات</p>
+    <!-- SKILLS -->
+    <section id="skills">
+        <div class="section-label reveal">What I Do</div>
+        <h2 class="section-title reveal reveal-delay-1">SERVICES.</h2>
+        <div class="skills-grid">
+            <div class="skill-card reveal reveal-delay-1">
+                <span class="skill-icon">⚡</span>
+                <div class="skill-name">MOTION GRAPHICS</div>
+                <div class="skill-desc">انيميشن وموشن جرافيك احترافي للإعلانات والسوشيال ميديا والعروض التقديمية</div>
+                <div class="skill-tags">
+                    <span class="tag">After Effects</span>
+                    <span class="tag">Cinema 4D</span>
+                    <span class="tag">Lottie</span>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <h2>من أنا</h2>
-                    <p>أنا مصمم جرافيك متخصص في إنشاء هويات بصرية قوية وتصاميم ويب حديثة. مع خبرة تزيد عن عدة سنوات في
-                        مجال التصميم، أساعد الشركات والعلامات التجارية على البروز والتميز في السوق.</p>
-                    <p>أؤمن بأن التصميم الجيد ليس فقط جميل الشكل، بل يجب أن يحقق أهدافاً محددة ويحكي قصة العلامة
-                        التجارية بفعالية.</p>
-                    <div class="about-stats">
-                        <div class="stat">
-                            <h3>50+</h3>
-                            <p>مشروع منجز</p>
-                        </div>
-                        <div class="stat">
-                            <h3>30+</h3>
-                            <p>عميل سعيد</p>
-                        </div>
-                        <div class="stat">
-                            <h3>5+</h3>
-                            <p>سنوات خبرة</p>
-                        </div>
-                    </div>
+            <div class="skill-card reveal reveal-delay-2">
+                <span class="skill-icon">🎯</span>
+                <div class="skill-name">AD CAMPAIGNS</div>
+                <div class="skill-desc">تصميم حملات إعلانية متكاملة تستهدف الجمهور وتحقق نتائج ملموسة</div>
+                <div class="skill-tags">
+                    <span class="tag">Social Ads</span>
+                    <span class="tag">OOH</span>
+                    <span class="tag">Digital</span>
                 </div>
-                <div class="about-image">
-                    <div class="image-container">
-                        <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg"
-                            style="width: 100%; height: 100%; border-radius: 15px; background: linear-gradient(135deg, #667eea, #764ba2);">
-                            <defs>
-                                <linearGradient id="skinGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#f4a460;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#daa520;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                            <!-- Head -->
-                            <circle cx="200" cy="120" r="60" fill="url(#skinGrad)" />
-                            <!-- Hair -->
-                            <path d="M 140 120 Q 130 60 200 40 Q 270 60 260 120" fill="#2c2c2c" />
-                            <!-- Eyes -->
-                            <circle cx="180" cy="110" r="6" fill="#000" />
-                            <circle cx="220" cy="110" r="6" fill="#000" />
-                            <circle cx="182" cy="108" r="2" fill="#fff" />
-                            <circle cx="222" cy="108" r="2" fill="#fff" />
-                            <!-- Smile -->
-                            <path d="M 180 130 Q 200 140 220 130" stroke="#000" stroke-width="2" fill="none"
-                                stroke-linecap="round" />
-                            <!-- Body -->
-                            <ellipse cx="200" cy="280" rx="70" ry="100" fill="#667eea" opacity="0.3" />
-                            <!-- Shirt/Sweater -->
-                            <path d="M 130 180 L 120 280 Q 120 350 200 370 Q 280 350 280 280 L 270 180 Z"
-                                fill="#764ba2" />
-                            <!-- Arms -->
-                            <ellipse cx="80" cy="240" rx="30" ry="70" fill="url(#skinGrad)"
-                                transform="rotate(-30 80 240)" />
-                            <ellipse cx="320" cy="240" rx="30" ry="70" fill="url(#skinGrad)"
-                                transform="rotate(30 320 240)" />
-                            <!-- Hands -->
-                            <circle cx="50" cy="300" r="25" fill="url(#skinGrad)" />
-                            <circle cx="350" cy="300" r="25" fill="url(#skinGrad)" />
-                            <!-- Decorative elements -->
-                            <circle cx="100" cy="150" r="8" fill="rgba(255,255,255,0.2)" />
-                            <circle cx="300" cy="150" r="8" fill="rgba(255,255,255,0.2)" />
-                        </svg>
-                        <div class="image-decoration"></div>
-                    </div>
+            </div>
+            <div class="skill-card reveal reveal-delay-3">
+                <span class="skill-icon">🔥</span>
+                <div class="skill-name">BRAND IDENTITY</div>
+                <div class="skill-desc">هوية بصرية متكاملة تعكس شخصية علامتك التجارية وتجعلها تبرز في السوق</div>
+                <div class="skill-tags">
+                    <span class="tag">Logo</span>
+                    <span class="tag">Guidelines</span>
+                    <span class="tag">Visual ID</span>
+                </div>
+            </div>
+            <div class="skill-card reveal reveal-delay-1">
+                <span class="skill-icon">📱</span>
+                <div class="skill-name">SOCIAL MEDIA</div>
+                <div class="skill-desc">محتوى بصري متحرك وجذاب للسوشيال ميديا يزيد التفاعل ويبني الحضور الرقمي</div>
+                <div class="skill-tags">
+                    <span class="tag">Reels</span>
+                    <span class="tag">Stories</span>
+                    <span class="tag">Feeds</span>
+                </div>
+            </div>
+            <div class="skill-card reveal reveal-delay-2">
+                <span class="skill-icon">🎬</span>
+                <div class="skill-name">VIDEO EDITING</div>
+                <div class="skill-desc">مونتاج احترافي وتحرير فيديو مع مؤثرات بصرية تضيف عمق ويجعل المحتوى يشد النظر
+                </div>
+                <div class="skill-tags">
+                    <span class="tag">Premiere</span>
+                    <span class="tag">DaVinci</span>
+                    <span class="tag">VFX</span>
+                </div>
+            </div>
+            <div class="skill-card reveal reveal-delay-3">
+                <span class="skill-icon">✦</span>
+                <div class="skill-name">VISUAL ART</div>
+                <div class="skill-desc">فن بصري وتصوير إبداعي يتحول إلى محتوى رقمي يحكي قصة ويولّد مشاعر</div>
+                <div class="skill-tags">
+                    <span class="tag">Illustration</span>
+                    <span class="tag">Photoshop</span>
+                    <span class="tag">Art Dir.</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="section-header">
-                <h2>تواصل معي</h2>
-                <div class="header-line"></div>
+    <!-- PORTFOLIO -->
+    <section id="portfolio">
+        <div class="portfolio-header">
+            <div>
+                <div class="section-label reveal">Selected Work</div>
+                <h2 class="section-title reveal reveal-delay-1">PROJECTS.</h2>
             </div>
+            <div class="portfolio-filter reveal">
+                <button class="filter-btn" onclick="filterWork(this,'all')">All</button>
+                <button class="filter-btn active" onclick="filterWork(this,'motion')">Motion</button>
+                <button class="filter-btn" onclick="filterWork(this,'brand')">Branding</button>
+                <button class="filter-btn" onclick="filterWork(this,'social')">Social</button>
+            </div>
+        </div>
+        <div class="portfolio-grid" id="portfolioGrid">
+            <!-- Work items will be generated by JS -->
+        </div>
+    </section>
 
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="info-card">
-                        <div class="info-icon">📧</div>
-                        <h3>البريد الإلكتروني</h3>
-                        <p>your-email@example.com</p>
-                    </div>
-                    <div class="info-card">
-                        <div class="info-icon">📱</div>
-                        <h3>الهاتف</h3>
-                        <p>+966 50 123 4567</p>
-                    </div>
-                    <div class="info-card">
-                        <div class="info-icon">📍</div>
-                        <h3>الموقع</h3>
-                        <p>المملكة العربية السعودية</p>
-                    </div>
-                </div>
-
-                <form class="contact-form" id="contactForm">
-                    <div class="form-group">
-                        <input type="text" placeholder="اسمك" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" placeholder="بريدك الإلكتروني" required>
-                    </div>
-                    <div class="form-group">
-                        <textarea placeholder="رسالتك" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">إرسال الرسالة</button>
-                </form>
+    <!-- PROCESS -->
+    <section id="process">
+        <div class="section-label reveal">How I Work</div>
+        <h2 class="section-title reveal reveal-delay-1">PROCESS.</h2>
+        <div class="process-steps">
+            <div class="process-step reveal reveal-delay-1">
+                <div class="step-num">01</div>
+                <div class="step-title">DISCOVER</div>
+                <div class="step-desc">أفهم علامتك التجارية وجمهورك المستهدف وأهدافك قبل أي خطوة</div>
+            </div>
+            <div class="process-step reveal reveal-delay-2">
+                <div class="step-num">02</div>
+                <div class="step-title">CONCEPT</div>
+                <div class="step-desc">أطور أفكاراً إبداعية وأختار الاتجاه الأقوى الذي يخدم رسالتك</div>
+            </div>
+            <div class="process-step reveal reveal-delay-3">
+                <div class="step-num">03</div>
+                <div class="step-title">CREATE</div>
+                <div class="step-desc">أصمم وأحرك وأنتج المحتوى بأعلى جودة مع اهتمام بكل التفاصيل</div>
+            </div>
+            <div class="process-step reveal reveal-delay-4">
+                <div class="step-num">04</div>
+                <div class="step-title">DELIVER</div>
+                <div class="step-desc">أسلّم الملفات النهائية في الوقت المحدد وأتابع معك لأضمن رضاك</div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="social-links">
-                <a href="#" class="social-icon">Instagram</a>
-                <a href="#" class="social-icon">Behance</a>
-                <a href="#" class="social-icon">LinkedIn</a>
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="contact-bg-text">CONTACT</div>
+        <div class="contact-content">
+            <div class="section-label reveal">Get In Touch</div>
+            <h2 class="contact-big reveal reveal-delay-1">
+                HAVE A<br>PROJECT?<br><a href="mailto:hello@portfolio.com">LET'S TALK.</a>
+            </h2>
+            <div class="contact-links reveal reveal-delay-2">
+                <a href="mailto:hello@portfolio.com" class="contact-link"><span>✉</span> Email Me</a>
+                <a href="#" class="contact-link"><span>📸</span> Instagram</a>
+                <a href="#" class="contact-link"><span>💼</span> Behance</a>
+                <a href="#" class="contact-link"><span>▶</span> YouTube</a>
             </div>
-            <p>&copy; 2026 جميع الحقوق محفوظة. صُنع بـ ❤️ من الحب للتصميم</p>
         </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-logo">PORTFOLIO.</div>
+        <div class="footer-copy">© 2025 — All Rights Reserved — Crafted with ❤️ in Cairo</div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // ===== CURSOR =====
+        const cursor = document.getElementById('cursor');
+        const ring = document.getElementById('cursor-ring');
+        let mx = 0, my = 0, rx = 0, ry = 0;
+        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+        function animateCursor() {
+            rx += (mx - rx) * 0.15;
+            ry += (my - ry) * 0.15;
+            cursor.style.left = mx + 'px';
+            cursor.style.top = my + 'px';
+            ring.style.left = rx + 'px';
+            ring.style.top = ry + 'px';
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+        document.querySelectorAll('a, button, .work-item, .skill-card').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'translate(-50%,-50%) scale(2.5)';
+                ring.style.transform = 'translate(-50%,-50%) scale(1.5)';
+                ring.style.borderColor = 'rgba(26,26,26,0.8)';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+                ring.style.transform = 'translate(-50%,-50%) scale(1)';
+                ring.style.borderColor = 'rgba(26,26,26,0.4)';
+            });
+        });
+
+        // ===== LOADER =====
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 2000);
+        });
+
+        // ===== SCROLL REVEAL =====
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) { e.target.classList.add('visible'); }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // ===== COUNTER =====
+        const counterObs = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    const el = e.target;
+                    const target = parseInt(el.dataset.target);
+                    let current = 0;
+                    const step = target / 60;
+                    const timer = setInterval(() => {
+                        current += step;
+                        if (current >= target) { current = target; clearInterval(timer); }
+                        el.textContent = Math.floor(current) + '+';
+                    }, 25);
+                    counterObs.unobserve(el);
+                }
+            });
+        }, { threshold: 0.5 });
+        document.querySelectorAll('.counter').forEach(el => counterObs.observe(el));
+
+        // ===== PORTFOLIO CANVASES =====
+        const projects = [
+            { cat: 'motion', name: 'PULSE CAMPAIGN', year: '2024', colors: ['#1a1a1a', '#e0e0de', '#555555'], type: 'particles' },
+            { cat: 'brand', name: 'NOVA BRAND', year: '2024', colors: ['#444444', '#d0d0ce', '#888888'], type: 'geometry' },
+            { cat: 'social', name: 'REEL SERIES', year: '2024', colors: ['#222222', '#c8c8c6', '#666666'], type: 'wave' },
+            { cat: 'motion', name: 'AD LAUNCH', year: '2023', colors: ['#333333', '#dcdcda', '#777777'], type: 'grid' },
+            { cat: 'brand', name: 'BOLD IDENTITY', year: '2023', colors: ['#111111', '#e8e8e6', '#444444'], type: 'lines' },
+            { cat: 'social', name: 'CONTENT PACK', year: '2023', colors: ['#555555', '#f0f0ee', '#999999'], type: 'dots' },
+            { cat: 'motion', name: 'OPENER VIDEO', year: '2023', colors: ['#1a1a1a', '#d8d8d6', '#666666'], type: 'spiral' },
+        ];
+
+        const grid = document.getElementById('portfolioGrid');
+
+        projects.forEach((p, i) => {
+            const item = document.createElement('div');
+            item.className = 'work-item reveal';
+            item.dataset.cat = p.cat;
+            item.innerHTML = `
+    <div class="work-canvas"><canvas id="canvas-${i}"></canvas></div>
+    <div class="work-overlay">
+      <div class="work-info">
+        <div class="work-cat">${p.cat}</div>
+        <div class="work-name">${p.name}</div>
+        <div class="work-year">${p.year}</div>
+      </div>
+    </div>`;
+            grid.appendChild(item);
+            setTimeout(() => initCanvas(i, p), 500);
+        });
+
+        function initCanvas(i, p) {
+            const canvas = document.getElementById('canvas-' + i);
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const resize = () => {
+                canvas.width = canvas.offsetWidth;
+                canvas.height = canvas.offsetHeight;
+            };
+            resize();
+            new ResizeObserver(resize).observe(canvas);
+            let t = 0;
+            const draw = () => {
+                if (!canvas.width) { requestAnimationFrame(draw); return; }
+                ctx.fillStyle = p.colors[1];
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                const W = canvas.width, H = canvas.height;
+                t += 0.02;
+                if (p.type === 'particles') drawParticles(ctx, W, H, t, p.colors);
+                else if (p.type === 'geometry') drawGeometry(ctx, W, H, t, p.colors);
+                else if (p.type === 'wave') drawWave(ctx, W, H, t, p.colors);
+                else if (p.type === 'grid') drawGrid(ctx, W, H, t, p.colors);
+                else if (p.type === 'lines') drawLines(ctx, W, H, t, p.colors);
+                else if (p.type === 'dots') drawDots(ctx, W, H, t, p.colors);
+                else if (p.type === 'spiral') drawSpiral(ctx, W, H, t, p.colors);
+                requestAnimationFrame(draw);
+            };
+            draw();
+        }
+
+        function drawParticles(ctx, W, H, t, c) {
+            for (let i = 0; i < 60; i++) {
+                const angle = (i / 60) * Math.PI * 2 + t;
+                const r = 80 + Math.sin(t * 2 + i * 0.3) * 40;
+                const x = W / 2 + Math.cos(angle) * r * (W / 300);
+                const y = H / 2 + Math.sin(angle * 1.3) * r * (H / 300);
+                const sz = 2 + Math.sin(t + i) * 1.5;
+                ctx.beginPath();
+                ctx.arc(x, y, sz, 0, Math.PI * 2);
+                ctx.fillStyle = i % 3 === 0 ? c[0] : c[2];
+                ctx.globalAlpha = 0.6 + Math.sin(t + i) * 0.4;
+                ctx.fill();
+            }
+            ctx.globalAlpha = 1;
+            ctx.beginPath();
+            ctx.arc(W / 2, H / 2, 3, 0, Math.PI * 2);
+            ctx.fillStyle = c[0];
+            ctx.fill();
+            const grad = ctx.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, Math.min(W, H) * 0.4);
+            grad.addColorStop(0, c[0] + '18');
+            grad.addColorStop(1, 'transparent');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, W, H);
+        }
+
+        function drawGeometry(ctx, W, H, t, c) {
+            const cx = W / 2, cy = H / 2;
+            for (let j = 0; j < 4; j++) {
+                const sides = 3 + j;
+                const r = 30 + j * 25 + Math.sin(t + j) * 10;
+                ctx.beginPath();
+                for (let i = 0; i <= sides; i++) {
+                    const a = (i / sides) * Math.PI * 2 + t * (j % 2 === 0 ? 1 : -1);
+                    const x = cx + Math.cos(a) * r * (W / 200);
+                    const y = cy + Math.sin(a) * r * (H / 200);
+                    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+                }
+                ctx.closePath();
+                ctx.strokeStyle = j === 0 ? c[0] : c[2];
+                ctx.lineWidth = 1.5;
+                ctx.globalAlpha = 0.4 + j * 0.1;
+                ctx.stroke();
+            }
+            ctx.globalAlpha = 1;
+        }
+
+        function drawWave(ctx, W, H, t, c) {
+            for (let row = 0; row < 4; row++) {
+                ctx.beginPath();
+                const y0 = H * 0.2 + row * (H * 0.15);
+                ctx.moveTo(0, y0);
+                for (let x = 0; x <= W; x += 3) {
+                    const y = y0 + Math.sin((x / W) * Math.PI * 4 + t + row) * (30 + row * 5) * (H / 200);
+                    ctx.lineTo(x, y);
+                }
+                ctx.strokeStyle = row % 2 === 0 ? c[0] : c[2];
+                ctx.lineWidth = 1.5;
+                ctx.globalAlpha = 0.5 - row * 0.1;
+                ctx.stroke();
+            }
+            ctx.globalAlpha = 1;
+        }
+
+        function drawGrid(ctx, W, H, t, c) {
+            const cols = 8, rows = 6;
+            for (let col = 0; col < cols; col++) {
+                for (let row = 0; row < rows; row++) {
+                    const x = (col / cols) * W + W / cols / 2;
+                    const y = (row / rows) * H + H / rows / 2;
+                    const sz = 3 + Math.sin(t + col * 0.5 + row * 0.7) * 3;
+                    ctx.beginPath();
+                    ctx.arc(x, y, sz, 0, Math.PI * 2);
+                    ctx.fillStyle = (col + row) % 3 === 0 ? c[0] : c[2];
+                    ctx.globalAlpha = 0.3 + Math.sin(t * 2 + col + row) * 0.3;
+                    ctx.fill();
+                }
+            }
+            ctx.globalAlpha = 1;
+        }
+
+        function drawLines(ctx, W, H, t, c) {
+            const n = 12;
+            for (let i = 0; i < n; i++) {
+                const progress = (i / n + t * 0.05) % 1;
+                const x = progress * W;
+                const skew = Math.sin(t + i) * 30;
+                ctx.beginPath();
+                ctx.moveTo(x + skew, 0);
+                ctx.lineTo(x - skew, H);
+                ctx.strokeStyle = i % 2 === 0 ? c[0] : c[2];
+                ctx.lineWidth = 1;
+                ctx.globalAlpha = 0.2 + Math.sin(t + i * 0.5) * 0.2;
+                ctx.stroke();
+            }
+            ctx.globalAlpha = 1;
+        }
+
+        function drawDots(ctx, W, H, t, c) {
+            const n = 50;
+            for (let i = 0; i < n; i++) {
+                const x = ((Math.sin(i * 2.3 + t) * 0.5 + 0.5)) * W;
+                const y = ((Math.cos(i * 1.7 + t * 0.8) * 0.5 + 0.5)) * H;
+                const sz = 2 + Math.sin(t * 2 + i) * 2;
+                ctx.beginPath();
+                ctx.arc(x, y, sz, 0, Math.PI * 2);
+                ctx.fillStyle = i % 4 === 0 ? c[0] : c[2];
+                ctx.globalAlpha = 0.5 + Math.sin(t + i) * 0.3;
+                ctx.fill();
+            }
+            ctx.globalAlpha = 1;
+        }
+
+        function drawSpiral(ctx, W, H, t, c) {
+            ctx.beginPath();
+            for (let a = 0; a < Math.PI * 10; a += 0.05) {
+                const r = a * (Math.min(W, H) / 80) + Math.sin(t * 3) * 5;
+                const x = W / 2 + Math.cos(a + t) * r;
+                const y = H / 2 + Math.sin(a + t) * r;
+                a === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+            }
+            ctx.strokeStyle = c[0];
+            ctx.lineWidth = 1;
+            ctx.globalAlpha = 0.5;
+            ctx.stroke();
+            ctx.globalAlpha = 1;
+        }
+
+        // ===== FILTER =====
+        function filterWork(btn, cat) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.work-item').forEach(item => {
+                const show = cat === 'all' || item.dataset.cat === cat;
+                item.style.opacity = show ? '1' : '0.2';
+                item.style.pointerEvents = show ? 'auto' : 'none';
+            });
+        }
+
+        // Set default filter to motion on load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const motionBtn = document.querySelector('.filter-btn[onclick*="motion"]');
+                if (motionBtn) filterWork(motionBtn, 'motion');
+            }, 2100);
+        });
+
+        // ===== NAV HIDE ON SCROLL =====
+        let lastScroll = 0;
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            const s = window.scrollY;
+            nav.style.opacity = s > lastScroll && s > 100 ? '0' : '1';
+            lastScroll = s;
+        });
+    </script>
 </body>
 
 </html>
