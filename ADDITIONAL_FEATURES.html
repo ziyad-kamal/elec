@@ -1,0 +1,499 @@
+<!-- 
+    💡 نصائح مفيدة لتحسين الموقع
+    ============================================
+    
+    هذا الملف يحتوي على أكواد إضافية وتحسينات
+    يمكنك نسخها واستخدامها في index.html
+-->
+
+<!-- ============================================
+     1. إضافة صور بدلاً من الألوان الملونة
+     ============================================ -->
+
+<!-- بدلاً من هذا: -->
+<div class="placeholder" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+    <i class="fas fa-star"></i>
+</div>
+
+<!-- استخدم هذا: -->
+<img src="path/to/your/image.jpg" alt="اسم المشروع" style="width:100%; height:100%; object-fit:cover;">
+
+
+<!-- ============================================
+     2. إضافة فيديو في Hero Section
+     ============================================ -->
+
+<!-- أضف بعد <div class="hero-image"> -->
+<div class="hero-image">
+    <video autoplay muted loop style="width:100%; height:100%; object-fit:cover; border-radius:20px;">
+        <source src="path/to/video.mp4" type="video/mp4">
+        متصفحك لا يدعم الفيديو
+    </video>
+</div>
+
+
+<!-- ============================================
+     3. إضافة نموذج تقييمات العملاء
+     ============================================ -->
+
+<section id="testimonials" class="testimonials">
+    <div class="container">
+        <h2 class="section-title">آراء العملاء</h2>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"عمل احترافي جداً ونتائج رائعة!"</p>
+                <div class="testimonial-author">
+                    <h4>محمد أحمد</h4>
+                    <p>مدير شركة تقنية</p>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"أفضل مصمم تعاملت معه، يستحق التوصية!"</p>
+                <div class="testimonial-author">
+                    <h4>فاطمة علي</h4>
+                    <p>مالكة متجر إلكتروني</p>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"سرعة وكفاءة في العمل، ممتاز جداً!"</p>
+                <div class="testimonial-author">
+                    <h4>خالد محمود</h4>
+                    <p>مدير تسويق</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CSS للتقييمات: -->
+<style>
+    .testimonials {
+        padding: 100px 20px;
+        background: white;
+    }
+
+    .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .testimonial-card {
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+        padding: 2rem;
+        border-radius: 15px;
+        border-left: 4px solid #667eea;
+        transition: all 0.3s ease;
+    }
+
+    .testimonial-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+    }
+
+    .stars {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        letter-spacing: 2px;
+    }
+
+    .testimonial-text {
+        color: #2d3748;
+        font-style: italic;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+    }
+
+    .testimonial-author h4 {
+        color: #667eea;
+        margin-bottom: 0.25rem;
+    }
+
+    .testimonial-author p {
+        color: #718096;
+        font-size: 0.9rem;
+    }
+</style>
+
+
+<!-- ============================================
+     4. إضافة قسم "لماذا تختارني"
+     ============================================ -->
+
+<section class="features">
+    <div class="container">
+        <h2 class="section-title">لماذا تختار خدماتي؟</h2>
+
+        <div class="features-grid">
+            <div class="feature-box">
+                <i class="fas fa-rocket"></i>
+                <h3>سريع وفعّال</h3>
+                <p>تسليم المشاريع في الموعد المحدد مع جودة عالية</p>
+            </div>
+
+            <div class="feature-box">
+                <i class="fas fa-palette"></i>
+                <h3>إبداع لامحدود</h3>
+                <p>أفكار جديدة وتصاميم فريدة تعكس رؤيتك</p>
+            </div>
+
+            <div class="feature-box">
+                <i class="fas fa-headset"></i>
+                <h3>دعم مميز</h3>
+                <p>تواصل سريع وحل جميع استفساراتك</p>
+            </div>
+
+            <div class="feature-box">
+                <i class="fas fa-dollar-sign"></i>
+                <h3>أسعار معقولة</h3>
+                <p>قيمة حقيقية مقابل الخدمة دون اغلاق</p>
+            </div>
+
+            <div class="feature-box">
+                <i class="fas fa-lock"></i>
+                <h3>سرية عالية</h3>
+                <p>حماية كاملة لأفكارك وبيانات مشروعك</p>
+            </div>
+
+            <div class="feature-box">
+                <i class="fas fa-sync"></i>
+                <h3>تعديلات مجانية</h3>
+                <p>تعديلات غير محدودة حتى تصل للنتيجة المطلوبة</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CSS للميزات: -->
+<style>
+    .features {
+        padding: 100px 20px;
+        background: #f7fafc;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .feature-box {
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        text-align: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .feature-box:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 35px rgba(102, 126, 234, 0.2);
+    }
+
+    .feature-box i {
+        font-size: 3rem;
+        color: #667eea;
+        margin-bottom: 1rem;
+        display: block;
+    }
+
+    .feature-box h3 {
+        color: #2d3748;
+        margin-bottom: 0.75rem;
+        font-size: 1.25rem;
+    }
+
+    .feature-box p {
+        color: #718096;
+        line-height: 1.6;
+    }
+</style>
+
+
+<!-- ============================================
+     5. إضافة قسم الأسعار
+     ============================================ -->
+
+<section class="pricing">
+    <div class="container">
+        <h2 class="section-title">الحزم والأسعار</h2>
+
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>حزمة بدء</h3>
+                <div class="price">
+                    <span class="amount">500</span>
+                    <span class="currency">ريال</span>
+                </div>
+                <ul class="features-list">
+                    <li>✓ شعار بسيط</li>
+                    <li>✓ 3 خيارات</li>
+                    <li>✓ 2 تعديل</li>
+                </ul>
+                <button class="btn btn-secondary">اختر هذه الحزمة</button>
+            </div>
+
+            <div class="pricing-card featured">
+                <div class="badge">الأكثر شيوعاً</div>
+                <h3>حزمة احترافية</h3>
+                <div class="price">
+                    <span class="amount">1500</span>
+                    <span class="currency">ريال</span>
+                </div>
+                <ul class="features-list">
+                    <li>✓ هوية بصرية كاملة</li>
+                    <li>✓ شعار متقدم</li>
+                    <li>✓ نماذج قابلة للطباعة</li>
+                    <li>✓ 5 تعديلات</li>
+                </ul>
+                <button class="btn btn-primary">اختر هذه الحزمة</button>
+            </div>
+
+            <div class="pricing-card">
+                <h3>حزمة متقدمة</h3>
+                <div class="price">
+                    <span class="amount">3000</span>
+                    <span class="currency">ريال</span>
+                </div>
+                <ul class="features-list">
+                    <li>✓ كل ما سبق</li>
+                    <li>✓ دليل العلامة التجارية</li>
+                    <li>✓ مواد تسويقية</li>
+                    <li>✓ دعم 3 أشهر</li>
+                </ul>
+                <button class="btn btn-secondary">اختر هذه الحزمة</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CSS للأسعار: -->
+<style>
+    .pricing {
+        padding: 100px 20px;
+        background: white;
+    }
+
+    .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .pricing-card {
+        background: white;
+        border: 2px solid #e2e8f0;
+        border-radius: 15px;
+        padding: 2.5rem;
+        text-align: center;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    .pricing-card.featured {
+        border-color: #667eea;
+        transform: scale(1.05);
+        box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+    }
+
+    .pricing-card.featured .badge {
+        position: absolute;
+        top: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+
+    .pricing-card h3 {
+        color: #2d3748;
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+    }
+
+    .price {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .amount {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: #667eea;
+    }
+
+    .currency {
+        color: #718096;
+        padding-top: 0.5rem;
+    }
+
+    .features-list {
+        list-style: none;
+        margin-bottom: 2rem;
+        text-align: right;
+    }
+
+    .features-list li {
+        color: #718096;
+        margin-bottom: 0.75rem;
+        font-weight: 500;
+    }
+
+    .pricing-card:hover:not(.featured) {
+        border-color: #667eea;
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+    }
+</style>
+
+
+<!-- ============================================
+     6. إضافة Favicon (أيقونة الموقع)
+     ============================================ -->
+
+<!-- أضف في <head> -->
+<link rel="icon" type="image/png"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%23667eea'>✨</text></svg>">
+
+
+<!-- ============================================
+     7. نموذج رسالة بريد متقدم (FormSpree)
+     ============================================ -->
+
+<!-- استبدل النموذج الحالي بهذا: -->
+<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="contact-form" id="contactForm"
+    accept-charset="UTF-8">
+    <input type="hidden" name="_captcha" value="false">
+
+    <div class="form-group">
+        <input type="text" name="name" placeholder="اسمك الكامل" required class="form-input">
+    </div>
+
+    <div class="form-group">
+        <input type="email" name="email" placeholder="بريدك الإلكتروني" required class="form-input">
+    </div>
+
+    <div class="form-group">
+        <input type="tel" name="phone" placeholder="رقم هاتفك (اختياري)" class="form-input">
+    </div>
+
+    <div class="form-group">
+        <select name="subject" required class="form-input">
+            <option value="">اختر نوع المشروع</option>
+            <option value="Logo Design">تصميم شعار</option>
+            <option value="Branding">هوية بصرية</option>
+            <option value="UI Design">تصميم واجهة</option>
+            <option value="Print Design">تصميم طباعة</option>
+            <option value="Social Media">وسائل اجتماعية</option>
+            <option value="Other">أخرى</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <input type="text" name="budget" placeholder="الميزانية (اختياري)" class="form-input">
+    </div>
+
+    <div class="form-group">
+        <textarea name="message" placeholder="أخبرني عن مشروعك بالتفصيل..." rows="5" required
+            class="form-input"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-submit">إرسال الرسالة</button>
+</form>
+
+<!-- للحصول على YOUR_FORM_ID:
+     1. اذهب إلى https://formspree.io
+     2. اختر "New Form"
+     3. أدخل بريدك الإلكتروني
+     4. استخرج المعرف من الصفحة
+-->
+
+
+<!-- ============================================
+     8. إضافة خريطة Google
+     ============================================ -->
+
+<!-- أضف في قسم Contact: -->
+<div style="margin-top: 2rem; border-radius: 15px; overflow: hidden;">
+    <iframe src="https://www.google.com/maps/embed?pb=YOUR_EMBED_CODE" width="100%" height="400" style="border:0;"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
+
+
+<!-- ============================================
+     9. إضافة شريط WhatsApp العائم
+     ============================================ -->
+
+<!-- أضف في نهاية <body> قبل </body> -->
+<a href="https://wa.me/966XXXXXXXXX?text=مرحباً%20أريد%20استفسار%20حول%20خدماتك" target="_blank" class="whatsapp-button"
+    title="تحدث معنا على WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- CSS -->
+<style>
+    .whatsapp-button {
+        position: fixed;
+        bottom: 30px;
+        left: 30px;
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #25D366, #20BA61);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        color: white;
+        z-index: 999;
+        box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .whatsapp-button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 8px 30px rgba(37, 211, 102, 0.6);
+    }
+
+    @media (max-width: 768px) {
+        .whatsapp-button {
+            bottom: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+        }
+    }
+</style>
+
+
+<!-- ============================================
+     نصائح مهمة:
+     ============================================
+
+     1. اختبر جميع الإضافات قبل النشر
+     2. تأكد من تحميل جميع الملفات الخارجية
+     3. استخدم صور مضغوطة لسرعة أفضل
+     4. حدّث المعلومات بشكل منتظم
+     5. اجعل الموقع متجاوب على الهاتف (اختبر!)
+
+     ============================================
+-->

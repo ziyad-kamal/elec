@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محمد - مصمم جرافيك احترافي</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">✨</span>
+                <span class="logo-text">ديزاين ستوديو</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link active">الرئيسية</a></li>
+                <li><a href="#portfolio" class="nav-link">معرض الأعمال</a></li>
+                <li><a href="#about" class="nav-link">حولي</a></li>
+                <li><a href="#contact" class="nav-link">تواصل معي</a></li>
+            </ul>
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title animate-fade-in">
+                    <span class="word">مصمم</span>
+                    <span class="word">جرافيك</span>
+                    <span class="word highlight">احترافي</span>
+                </h1>
+                <p class="hero-subtitle animate-fade-in-delay">
+                    أحول أفكارك إلى تصاميم مذهلة تترك انطباعاً دائماً
+                </p>
+                <div class="hero-buttons animate-fade-in-delay-2">
+                    <button class="btn btn-primary" onclick="scrollToSection('portfolio')">شاهد أعمالي</button>
+                    <button class="btn btn-secondary" onclick="scrollToSection('contact')">ابدأ مشروعك</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="floating-card card-1">
+                    <div class="card-icon">🎨</div>
+                </div>
+                <div class="floating-card card-2">
+                    <div class="card-icon">✏️</div>
+                </div>
+                <div class="floating-card card-3">
+                    <div class="card-icon">🖼️</div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>اسحب للأسفل</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2 class="section-title">معرض الأعمال</h2>
+            <p class="section-subtitle">أفضل تصاميمي في مختلف المجالات</p>
+
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">الكل</button>
+                <button class="filter-btn" data-filter="branding">هوية بصرية</button>
+                <button class="filter-btn" data-filter="ui">واجهات مستخدم</button>
+                <button class="filter-btn" data-filter="print">طباعة</button>
+                <button class="filter-btn" data-filter="social">وسائل اجتماعية</button>
+            </div>
+
+            <div class="portfolio-grid">
+                <!-- Branding Projects -->
+                <div class="portfolio-item" data-category="branding">
+                    <div class="portfolio-image">
+                        <div class="placeholder" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>هوية بصرية - شركة تقنية</h3>
+                        <p>تصميم هوية شاملة تضمن شعار وألوان وخطوط موحدة</p>
+                        <span class="category-badge">هوية بصرية</span>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="branding">
+                    <div class="portfolio-image">
+                        <div class="placeholder" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>شعار براند فاخرة</h3>
+                        <p>تصميم شعار أنيق لعلامة تجارية في مجال الموضة</p>
+                        <span class="category-badge">هوية بصرية</span>
+                    </div>
+                </div>
+
+                <!-- UI Projects -->
+                <div class="portfolio-item" data-category="ui">
+                    <div class="portfolio-image">
+                        <div class="placeholder" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>تصميم تطبيق موبايل</h3>
+                        <p>واجهة مستخدم جميلة وسهلة الاستخدام لتطبيق توصيل الطعام</p>
+                        <span class="category-badge">واجهات مستخدم</span>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="ui">
+                    <div class="portfolio-image">
+                        <div class="placeholder" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                            <i class="fas fa-laptop"></i>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>تصميم موقع تجارة إلكترونية</h3>
+                        <p>واجهة موقع احترافي لمتجر إلكتروني بتجربة مستخدم محسنة</p>
+                        <span class="category-badge">واجهات مستخدم</span>
+                    </div>
+                </div>
+
+                <!-- Print Projects -->
+                <div class="portfolio-item" data-category="print">
+                    <div class="portfolio-image">
+                        <div class="placeholder" style="background: linear-gradient(135deg, #ff9a56 0%, #ff6a88 100%);">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>تصميم كتيب تسويقي</h3>
+                        <p>كتيب متعدد الصفحات بتصميم احترافي وديناميكي</p>
+                        <span class="category-badge">طباعة</span>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="print">
+                    <div class="portfolio-image">
+                        <div class="placeholder" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <i class="fas fa-id-card"></i>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>تصميم بطاقات عمل</h3>
+                        <p>مجموعة بطاقات عمل احترافية بتصاميم فريدة</p>
+                        <span class="category-badge">طباعة</span>
+                    </div>
+                </div>
+
+                <!-- Social Media -->
+                <div class="portfolio-item" data-category="social">
+                    <div class="portfolio-image">
+                        <div class="placeholder" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                            <i class="fas fa-image"></i>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>منشورات وسائل اجتماعية</h3>
+                        <p>مجموعة منشورات احترافية لحملات إعلانية متعددة</p>
+                        <span class="category-badge">وسائل اجتماعية</span>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="social">
+                    <div class="portfolio-image">
+                        <div class="placeholder" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>تصميم قوالب فيديو</h3>
+                        <p>قوالب فيديو احترافية لمختلف منصات التواصل الاجتماعي</p>
+                        <span class="category-badge">وسائل اجتماعية</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">حولي</h2>
+
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>مصمم جرافيك متخصص وذو خبرة</h3>
+                    <p>
+                        مع أكثر من 8 سنوات من الخبرة في مجال التصميم الجرافيكي،
+                        ساعدت عشرات الشركات والعلامات التجارية على تحقيق رؤيتهم البصرية.
+                    </p>
+                    <p>
+                        متخصص في تصميم الهويات البصرية والواجهات الرقمية والمواد الطباعية.
+                        أركز على دمج الإبداع مع الفعالية لإنشاء تصاميم تحقق النتائج.
+                    </p>
+
+                    <div class="skills">
+                        <div class="skill-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Adobe Creative Suite</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>تصميم الهويات البصرية</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>تصميم واجهات المستخدم</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>تصميم المواد الطباعية</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>تصميم الإعلانات الرقمية</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>فن الحروفية والتايبوغرافي</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-stats">
+                    <div class="stat-box">
+                        <div class="stat-number">250+</div>
+                        <p>مشروع منجز</p>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">80+</div>
+                        <p>عميل راضي</p>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">8+</div>
+                        <p>سنوات خبرة</p>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">30+</div>
+                        <p>جوائز وتكريمات</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">تواصل معي</h2>
+            <p class="section-subtitle">دعنا نبدأ مشروعك القادم معاً</p>
+
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="info-box">
+                        <i class="fas fa-envelope"></i>
+                        <h3>البريد الإلكتروني</h3>
+                        <p>design@studio.com</p>
+                    </div>
+                    <div class="info-box">
+                        <i class="fas fa-phone"></i>
+                        <h3>الهاتف</h3>
+                        <p>+965 99999999</p>
+                    </div>
+                    <div class="info-box">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>الموقع</h3>
+                        <p>الكويت</p>
+                    </div>
+                </div>
+
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <input type="text" placeholder="اسمك الكامل" required class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="بريدك الإلكتروني" required class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <select required class="form-input">
+                            <option value="">اختر نوع المشروع</option>
+                            <option value="branding">هوية بصرية</option>
+                            <option value="ui">تصميم واجهة</option>
+                            <option value="print">طباعة</option>
+                            <option value="social">وسائل اجتماعية</option>
+                            <option value="other">أخرى</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="اخبرني عن مشروعك..." rows="5" required class="form-input"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-submit">إرسال الرسالة</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ديزاين ستوديو</h3>
+                    <p>تصاميم احترافية تحقق نتائج فعلية لعملك</p>
+                </div>
+                <div class="footer-section">
+                    <h3>الروابط السريعة</h3>
+                    <ul>
+                        <li><a href="#home">الرئيسية</a></li>
+                        <li><a href="#portfolio">الأعمال</a></li>
+                        <li><a href="#contact">تواصل معي</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>تابعني على</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-behance"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-dribbble"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 جميع الحقوق محفوظة | تصميم احترافي</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
